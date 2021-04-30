@@ -1,3 +1,5 @@
 alert("Hello World!")
 # pop-up on the browser of the javascript console
 
+console.log
+# outputs any calculation or text on the console
