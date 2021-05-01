@@ -140,12 +140,48 @@ console.log(`The total is ${bill + tip}`);
 //////////////////////////////// FUNDAMENTALS PART 2 ///////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////
 
+'use strict'; // less bugs, forbids to do some things, does not allow 
+// to use variables that would be methods in future js updates
 
-            
+// Functions
 
+function fruitProcessor(apples, oranges) { // parameters or arguments
+  console.log(apples, oranges);
+  const juice = `Juice with ${apples} apples and ${oranges} oranges`;
+  return juice;
+  // function body
+}
 
+let string = fruitProcessor(5, 6); // the return value juice is set to the variable string
+console.log(string);
 
+// DRY (Don't Repeat Yourself)
 
+// Function Declaration vs Function Expression
+function calcAge1(birthYear) {
+  return 2037 - birthYear;
+}
+const age1 = calcAge1(1991);
+console.log(age1);
+
+// Function expression
+const calcAge2 = function (birthYear) {
+  return 2037 - birthYear;
+}
+const age2 = calcAge2(1991);
+console.log(age1, age2)
+
+// Arrow Function good for single liner functions
+const calcAge3 = birthYear => 2037 - birthYear; // birth year is the parameter
+const age3 = calcAge3(1991);
+console.log(age3);
+
+// For bigger functions - multiple parameters
+const yearsUntilRetirement = (birthYear, firstName) => {
+  const age = 2037 - birthYear;
+  const retirement = 65 - age;
+  return `${firstName} retires in ${retirement}`;
+}
 
 
 
