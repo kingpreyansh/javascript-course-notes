@@ -34,10 +34,33 @@ const firstName = 'Jonas';
 const lastName = 'Jonas';
 console.log(firstName + ' ' + lastName);
 
+// Comparison
+console.log(ageJonas > ageSarah);
+const isFullAge = ageSarah >= 18; // boolean value
 
+// Strings
+const firstName = 'Jonas';
+const job = 'teacher';
+const birthYear = 1991;
+const year = 2037;
 
+const jonas = "I'm" + firstName + ',a ' + (year - birthYear) + 'years old' + job + '!';
 
+// Use template sreens with the `Back ticks`
+const jonasNew = `I'm ${firstName}, a ${year - birthYear} year old ${job}!`;
 
+// for multi line strings
+console.log(`String
+multiple
+lines`);
+
+// conditionals
+
+if(condition){
+  // executes iff condition is true
+} else{
+  // executes iff contition is false
+}
 
 
 
