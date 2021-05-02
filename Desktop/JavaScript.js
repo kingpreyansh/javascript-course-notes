@@ -183,10 +183,30 @@ const yearsUntilRetirement = (birthYear, firstName) => {
   return `${firstName} retires in ${retirement}`;
 }
 
+// Arrays
 
+const calcAge = function (birthYear) {
+  return 2037 - birthYear;
+}
+const years = new Array(1991, 34803, 08238, 2020);
+const ages = [calcAge(years[0]), calcAge(years[1]), calcAge(years[2])]
 
+// Arrays Methods
+const friends = ['Michael', 'Bob'];
+friends.pop() // pops the last element of the array
+friends.shift() // get the first element in the array
+friends.unshift() // add to the first position of the array
+friends.push() // adds to the last position of the arry
 
+// Bill Calculator with Arrays
 
+bill = 100;
+const tip = (bill) => {
+  let val = bill > 50 && bill < 300 ? bill * 0.20 : bill * 0.15;
+  return val;
+}
+bills = [tip(5), tip(10), tip(25), tip(50), tip(100)];
+console.log(bills);
 
 
 
