@@ -208,7 +208,29 @@ const tip = (bill) => {
 bills = [tip(5), tip(10), tip(25), tip(50), tip(100)];
 console.log(bills);
 
+// Objects
 
+const jones = {
+  firstName: 'Jonas',
+  lastName: 'Schmedtmann',
+  birthYear: 1991,
+  job: 'teacher',
+  friends: ['Michael', 'Peter', 'Steven'],
+  hasDriversLicense: true,
+
+  calcAge: function () { // a property of jones object
+    this.age = 2037 - this.birthYear;
+    return this.age;
+  },
+
+  summary: function () {
+    return (`${this.firstName} is a ${this.age}-year old ${this.job}, and he has ${this.hasDriversLicense ? "a" : "no"} driver's license`);
+  }
+
+}; // the order does not matter - any object can be accessed
+
+console.log(jones.calcAge());
+console.log(jones.summary());
 
 
 
