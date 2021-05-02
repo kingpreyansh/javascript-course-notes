@@ -208,7 +208,7 @@ const tip = (bill) => {
 bills = [tip(5), tip(10), tip(25), tip(50), tip(100)];
 console.log(bills);
 
-// Objects
+// Objects - notice how there is a function inside of the object
 
 const jones = {
   firstName: 'Jonas',
@@ -229,8 +229,85 @@ const jones = {
 
 }; // the order does not matter - any object can be accessed
 
-console.log(jones.calcAge());
+console.log(jones.calcAge()); // must call this or else age does not exist
 console.log(jones.summary());
+
+// Loops
+
+// For loop keeps running while condition is TRUE
+for (let rep = 1; rep <= 10; rep++) {
+  console.log(`Lifting weights repetition ${rep} 🏋️‍♀️`);
+}
+
+
+// Iterate through an object
+const jones = [
+  'Jonas',
+  'Schmedtmann',
+  1991,
+  'teacher',
+  true,
+  ['Michael', 'Peter', 'Steven'],
+];
+const types = [];
+
+// For loop keeps running while condition is TRUE
+for (let i = 0; i < jones.length; i++) {
+  // Reading from jones array
+  console.log(jones[i]);
+  // Filling types array
+  // types[i] = typeof jones[i];
+  types.push(typeof jones[i]);
+}
+
+// Continue
+console.log('----- ONLY STRINGS -----')
+for (let i = 0; i < jones.length; i++) {
+  if (typeof jones[i] !== 'string') continue; // if the current iteration is a string skip to the next iteration
+  console.log(jones[i], typeof jones[i]);
+}
+
+// Break
+console.log('----- BREAK WITH NUMBER -----')
+for (let i = 0; i < jones.length; i++) {
+  if (typeof jones[i] === 'number') break; // if the current iteration is a number then break out of the loop
+  console.log(jones[i], typeof jones[i]);
+}
+
+// Loop in a loop & Backward loops
+
+for (let i = jones.length - 1; i >= 0; i--) {
+  console.log(i, jones[i]);
+}
+
+for (let exercise = 1; exercise < 4; exercise++) {
+  console.log(`-------- Starting Exercise ${exercise} -------`);
+  for (let rep = 1; rep < 6; rep++) {
+    console.log(`Lifting weight repetition ${rep}`);
+  }
+};
+
+
+// While loops
+
+let rep = 1;
+while (rep <= 10) {
+  console.log(`Lifting weight repetition ${rep}`);
+  rep++;
+}
+
+// Random
+let dice = Math.trunc(Math.random() * 6) + 1;
+console.log(dice);
+
+// To set up live server
+// Install Node.js and run live-server
+
+
+
+
+
+
 
 
 
