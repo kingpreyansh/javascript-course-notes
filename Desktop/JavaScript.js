@@ -313,6 +313,9 @@ console.log(dice);
   color: red;
 } 
 
+// ID can be used for one specific item whereas the class is generalized and can be applied to a lot more things
+// at once
+
 #your-name { 
 //class selector
   background-color: yellow;
@@ -332,6 +335,61 @@ console.log(dice);
   box-sizing: border-box; // allows the size to be accurate if we say size = 100 
   // it wont take into account the other things
 }
+
+// DOM Manipulation - interact with the webpage
+console.log(document.querySelector('.message').textContent); // the text content of a specific ID
+
+// Document Object Model: Structured representation of HTML Documents. Allows JS to access HTML Elements and styles
+// to manipulate them
+
+
+document.querySelector('.message').textContent  = 'Some text goes here';
+document.querySelector('.guess').value = 23; // this is for the input box area
+
+// Event - something that happens in the website: a mouse moving, a mouse scrolling, clicking etc
+
+// EventListener checks for some event on the website
+// EventHandler handles the particular event and function will only be called when the event happens
+document.querySelector('.check').addEventListener('click', function () {
+  console.log(document.querySelector('.guess').value);
+})
+
+// Manipulate CSS with JS  
+document.querySelector('body').style.backgroundColor = '#60b347';
+// 'body' is the whole html tag and it's asking for the CSS 'style' which has the property background-color
+// but in js this will be backgroundColor
+
+// Refactoring our code: DRY Principle (Don't Repeat Yourself)
+  => Instead of having multiple if/else if : used a ternary operator
+
+// Problem with querySelector: whenever there is multiple only the first one gets chosen
+// So instead use querySelectAll
+
+ modal.classList.remove('hidden') // removes the class of the modal hidden
+
+document.addEventListener('keydown', function (e) { // e is for event but anything can be used
+  if (e.key === 'Escape') { // if the key pressed is escape
+    if (!modal.classList.contains('hidden')) {
+      closeModal();
+    }
+  }
+}) // for global events 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
