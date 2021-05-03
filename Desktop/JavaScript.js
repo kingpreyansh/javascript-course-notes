@@ -303,12 +303,35 @@ console.log(dice);
 // To set up live server
 // Install Node.js and run live-server
 
+// Developing and debugging: 
+// Use tools like Stackoverflow or MDN or Console Debugger in Chrome to debug applications and bugs
 
+// Basic HTML CSS
 
+.first { 
+// ID selector
+  color: red;
+} 
 
+#your-name { 
+//class selector
+  background-color: yellow;
+  border: 5px solid rgb(187, 75, 75)
+}
 
+#your-name h2{ 
+//class selector
+  background-color: yellow;
+  border: 5px solid rgb(187, 75, 75)
+}
 
-
+// selects everything in css
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; // allows the size to be accurate if we say size = 100 
+  // it wont take into account the other things
+}
 
 
 
