@@ -375,6 +375,10 @@ document.addEventListener('keydown', function (e) { // e is for event but anythi
   }
 }) // for global events 
 
+// classList can be toggled by: player1El.classList.toggle('player--active');
+// use '.' for the querySelector()
+
+
 
 
 
