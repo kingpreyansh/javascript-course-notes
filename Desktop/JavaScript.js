@@ -378,25 +378,272 @@ document.addEventListener('keydown', function (e) { // e is for event but anythi
 // classList can be toggled by: player1El.classList.toggle('player--active');
 // use '.' for the querySelector()
 
+// JavaScript Theory
+// High-level
+// Garbage Collected: removes unnecessary memory
+// Interpreted or just-in-time compiled
+// Multi-paradigm: an approach and mindset of structuring code
+// Prototype-based object-oriented
+// First-class functions: functions are treated just as regular variables
+// Dynamic: no data types - types only become known at runtime
+// Single-threaded: 
+// Non-blocking event loop
+//    Concurrency model: how the JavaScript engine handles multiple tasks happening at the same time.
+//    JavaScript runs in one single thread, so it can do one thing at a time
+
+// EVENT LOOP: Takes long running tasks, executes them in the "background", and puts 
+// them in the main thread once they are finished.
+
+// this keyword => points to the owner of the function
+
+// Primitive data types in JavaScript
+
+// Number
+// String
+// Boolean
+// Undefined
+// Null
+// Symbol
+// BigInt
+
+// Copying objects 
+const jessica = {
+  firstName: 'Jessica',
+  lastName: 'Williams',
+  age: 27,
+};
+
+const jessicaCopy = Object.assign({}, jessica2);
+jessicaCopy.lastName = 'Davis';
+console.log('Before marriage', jessica2);
+console.log('After marriage', jessicaCopy);
+
+jessicaCopy.family.push('Mary');
+jessicaCopy.family.push('John');
+
+// Destructuring Arrays
+
+const nested = [2, 4, [5, 6]];
+// const [i, , j] = nested;
+// console.log(i, j)
+
+// Nested Destructuring
+const [i, , [j, k]] = nested;
+console.log(i, j, k)
+
+// Default values
+const [p = 1, q = 1, r = 1] = [8, 9];
+console.log(p, q, r);
+
+// Object destructuring
+let a = 111;
+let b = 999;
+const obj = { a: 23, b: 7, c: 14 };
+({ a, b } = obj);
+console.log(a, b)
+
+// Nested objects
+const { fri: { open, close } } = openingHours; // object inside of an object
+console.log(open, close);
+
+// Spread operator
+const arr = [7, 8, 9];
+const newArr = [1, 2, ...arr];
+console.log(newArr);
+
+// spread operator takes all the elements from the array and doesnt create new variables - only 
+// used when new elements are added with commas
+
+// Copy objects
+const restaurant = {
+  name: 'Classico Italiano',
+  location: 'Via Angelo Tavanti 23, Firenze, Italy',
+  categories: ['Italian', 'Pizzeria', 'Vegetarian', 'Organic'],
+  starterMenu: ['Focaccia', 'Bruschetta', 'Garlic Bread', 'Caprese Salad'],
+  mainMenu: ['Pizza', 'Pasta', 'Risotto'],
+  openingHours: {
+    thu: {
+      open: 12,
+      close: 22,
+    },
+    fri: {
+      open: 11,
+      close: 23,
+    },
+    sat: {
+      open: 0, // Open 24 hours
+      close: 24,
+    },
+  },
+  order: function (starterIndex, mainIndex) {
+    return [this.starterMenu[starterIndex], this.mainMenu[mainIndex]];
+  },
+  orderDelivery: function ({
+    starterIndex = 1,
+    mainIndex = 0,
+    time = '20:00',
+    address,
+  }) {
+    console.log(`Order Recieved! ${this.starterMenu[starterIndex]} and ${this.mainMenu[mainIndex]} will be delivered to ${address} at ${time}`);
+  },
+
+  orderPasta: function (ing1, ing2, ing3) {
+    console.log(`Here is your delicious pasta with ${ing1} ${ing2} ${ing3}`);
+  }
+};
+
+// this copies everything in the object restaurant
+const restaurantCopy = { ...restaurant };
+
+// SPREAD, because on RIGHT side of =
+const arr = [1, 2, ...[3, 4]];
+
+// REST, because on LEFT side of =
+const [a, b, ...others] = [1, 2, 3, 4, 5];
+console.log(a, b, others);
 
 
+const [pizza, , risotto, ...otherFood] = [...restaurant.mainMenu, ...restaurant.starterMenu];
+// Does not include any skipped elements
 
+console.log(pizza, risotto, otherFood);
 
+// OBJECTS
+const { sat, ...weekDays } = restaurant.openingHours;
+console.log(weekDays);
 
+// Short Circuits
 
+// --- OR ---
+// evaluation continues until truthy value
 
+// --- AND ---
+console.log(0 && 'Jonas'); // => 0
+console.log(7 && 'Jonas'); = // => Jonas
+// evaluation continues until falsy value
 
+console.log('Hello' && 23 && null && 'jonas');
 
+// Nullish Coalescing Operator -> works with nullish values instead of 0 or '' only works with null and undefined
+(??)
 
+// For of loops
+const menu = [...restaurant.starterMenu, ...restaurant.mainMenu];
 
+for (const item of menu) console.log(item); // the for-of loop
 
+for (const [i, el] of menu.entries()) {
+  console.log(`${i + 1}: ${el}`);
+}
 
+// Optional Chaining - if a third property does not exist returns undefined immediately (?.)
 
+console.log(restaurant.openingHours.mon?.open); // only if till monday exists then it'll be read
+// used for deeply nested objects
 
+const days = ['mon', 'tue', 'wed', 'thu', 'fri', 'sat', 'sun'];
 
+for (const day of days) {
+  const open = restaurant.openingHours[day]?.open ?? 'closed';
+  console.log(`On ${day}, we open at ${open}`);
+}
 
+// Object keys and values
 
+// Property NAMES
+const properties = Object.keys(openingHours);
+console.log(properties);
 
+let openStr = We are open on ${properties.length} days: "
+for (const day of Object.keys(openingHours)) {
+  openStr += `${day}, `;
+  console.log(openStr);
+}
+
+// Property VALUES
+const values = Object.values(openingHours);
+console.log(values)
+
+// SETS
+const ordersSet = new Set([
+  'Pasta',
+  'Pizza',
+  'Pizza',
+  'Risotto',
+  'Pasta',
+  'Pizza'
+]);
+console.log(ordersSet);
+
+for (const order of ordersSet) console.log(order);
+
+const staff = ['Waiter', 'Chef', 'Waiter', 'Manager', 'Chef', 'Waiter'];
+const staffUnique = [...new Set(staff)]; // since the spread operator works on any iterable
+
+// MAPS
+// Convert from object to map
+console.log(Object.entries(openingHours));
+const hoursMap = new Map(Object.entries(openingHours));
+console.log(hoursMap);
+
+// destructuring the map
+console.log(question.get('question'));
+for (const [key, value] of question) {
+  if (typeof key === 'number') console.log(`Answer ${key}: ${value}`);
+}
+
+// const answer = Number(prompt('Your answer'));
+const answer = 3;
+console.log(answer);
+
+console.log(question.get(question.get('correct') === answer));
+
+// Convert map to array
+console.log([...question]);
+// console.log([...question.entries()]);
+console.log([...question.keys()]);
+console.log([...question.values()]);
+
+/*
+What data structure should we use *** IMPORTANT ***
+Sources of data
+1) From the program itselg: Data written directly in source code (status messages)
+2) From the UI: Data input from the user or data written in DOM (e.g. tasks in todo app)
+3) From external sources: Data fetched for example from web API (e.g. recipe objects)
+    |
+    |
+    |
+    -> Collection of data
+    |
+    -> Data Structure
+          -> Simple List: Arrays or Sets
+          -> Key/Value Pairs: Objects or Maps (allows us to describe values)
+
+    JSON is a special data formatting: esentially just text which can be converted to JS objects because it uses the same formatting as JS objects
+
+    Arrays vs Sets
+
+    Arrays:
+    Whenever ordered list of values are neeeded and might contain duplicates
+    Use when you need to manipulate data
+
+    Sets:
+    Use when you need to work with unique values
+    Use when high-performance is really important
+    Use to remove duplicates from arrays
+
+    Objects vs Maps (keys/values)
+
+    Objects: More "traditional" key/value store ("abused objects"
+      Easier to write and access values with . and [])
+        -> Use when you need to include funtions (methods)
+        -> Use when working with JSON (can convert to map)
+
+    Maps: Better performance, keys can have any data type, easy to iterate, easy to compute size
+      -> Use when you simply need to map keys to values
+      -> Use when you need keys that are NOT strings
+
+*/
 
 
 
