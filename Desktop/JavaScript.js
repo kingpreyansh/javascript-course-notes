@@ -645,8 +645,279 @@ Sources of data
 
 */
 
+const airline = 'TAP Air Portugal';
+const plane = 'A320';
+
+console.log(plane[0]);
+console.log(plane[1]);
+console.log(plane[2]);
+
+console.log('B737'[0]);
+
+console.log(airline.length)
+console.log('B737'.length) // length of string
+
+console.log(airline.indexOf('r')); // first occurence
+console.log(airline.lastIndexOf('r')); // last occurrence
+// case sensitive
+
+console.log(airline.slice(4)); // The begin parameter basically where the string will start\
+console.log(airline.slice(4, 7)); // slice method
+
+console.log(airline.slice(0, airline.indexOf(' ')))
+console.log(airline.slice(airline.lastIndexOf(' ') + 1))
+
+const checkMiddleSeat = function (seat) {
+  // B and E are middle seats
+  const s = seat.slice(-1);
+  if (s === 'B' || s === 'E') console.log('You got the middle seat :(')
+  else console.log('You got lucky :)')
+}
+checkMiddleSeat('11B');
+checkMiddleSeat('23C');
+checkMiddleSeat('3E');
+
+// comparing emails
+const email = 'hello@jonas.io';
+const loginEmail = '   Hello@Jonas.Io \n';
+
+// const lowerEmail = loginEmail.toLowerCase();
+// const trimmedEmail = loginEmail.trim(); // gets rid of whitespace and also \n
+// console.log(trimmedEmail);
+
+const normalizedEmail = loginEmail.toLowerCase().trim();
+console.log(normalizedEmail);
+
+// Replacing
+const priceGB = '288,98£' // need to replace pound with the $ sign and the ',' with the '.'
+const priceUS = priceGB.replace('£', '$').replace(',', '.');
+console.log(priceUS);
+
+const announcement = 'All passengers come to boarding door 23. Boarding door 23!'
+console.log(announcement.replaceAll('door', 'gate'));
+
+// Regular expression 
+console.log(announcement.replaceAll(/door/g, 'gate')); // Regular Expressions
+
+// Booleans: includes(), startsWith(), endsWith()
+const plane = 'A320neo';
+console.log(plane.includes('A320'));
+console.log(plane.endsWith('neo'));
+console.log(plane.startsWith('A'));
+
+if (plane.startsWith('Airbus') && plane.endsWith('neo'));
+
+// Practice exercise
+const checkBaggage = function (items) {
+  const baggage = items.toLowerCase();
+  if (baggage.includes('knife') || baggage.includes('gun')) console.log('You are NOT allowed on board');
+  else console.log('Welcome aboard!')
+}
+checkBaggage('I have a laptop, some food and a pocket knife');
+
+// Split Method
+
+console.log('a+very+nice+string'.split('+')) // string method
+console.log('Jonas Schmedtmann'.split(' '));
+
+const [firstName, lastName] = 'Jonas Schmedtmann'.split(' ');
+
+// Join method
+
+const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' ');
+console.log(newName);
+
+// Split Method
+
+console.log('a+very+nice+string'.split('+')) // string method
+console.log('Jonas Schmedtmann'.split(' '));
+
+const [firstName, lastName] = 'Jonas Schmedtmann'.split(' ');
+
+// Join method
+
+const newName = ['Mr.', firstName, lastName.toUpperCase()].join(' ');
+console.log(newName);
+
+const capitalizeName = function (name) {
+  const names = name.split(' ');
+  const namesUpper = [];
+
+  for (const n of names) {
+    namesUpper.push(n[0].toUpperCase() + n.slice(1));
+  }
+  console.log(namesUpper.join(' '));
+};
+
+capitalizeName('jessica ann smith davis');
+
+// Padding a string
+const message = 'Go to gate 23!'
+console.log(message.padStart(25, '~').padEnd(35, '~'));
+
+const maskCreditCard = function (number) {
+  const str = number + '';
+  const last = str.slice(-4);
+  return last.padStart(str.length, '*')
+}
+
+console.log(maskCreditCard(4168945921));
+maskCreditCard('416894592221');
+
+// Repeat
+const message2 = 'Bad weather... All Departures Dealayed...';
+console.log(message2.repeat(5));
+
+const planesInLine = function (n) {
+  console.log(`There are ${n} planes in line ${'✈️'.repeat(n)}`);
+}
+planesInLine(5);
+
+// More about functions
+
+const createBooking = function (flightNum, numPassengers = 1, price = 199) { // creating default values
+  // ES5 way of doing default values
+  // numPassengers = numPassengers || 1;
+  // price = price || 100;
+  const booking = {
+    flightNum,
+    numPassengers,
+    price
+  }
+  console.log(booking);
+  bookings.push(booking);
+}
+createBooking('LH123')
+createBooking('LH123', 2, 800);
+createBooking('LH123', undefined, 800); // Keeping the parameter as default
+
+// passing a primitive type to a function a copy is made
+// passing an object to the function passes the object itself
+
+// First Class vs Higher Order Functions
+
+// First class - all functions are values
+// JavaScript treats functions as first-class citizens
+// This means that functions are simply values
+// Functions are just another 'type' of object
+
+// Higher order function
+// A function that recieves another function as an argument, that returns a new function, or both
+// This is only possible because of first-class functions
+
+// First Class vs Higher Order Functions
+
+// First class function
+const oneWord = function (str) {
+  return str.replace(/ /g, '').toLowerCase();
+}
+
+const upperFirstWord = function (str) {
+  const [first, ...others] = str.split(' ');
+  return [first.toUpperCase(), ...others].join(' ');
+}
+
+// Higher-order function
+const transformer = function (str, fn) {
+  console.log(`Original string: ${str}`);
+  console.log(`Transformed string: ${fn(str)}`);
+
+  console.log(`Transformed by: ${fn.name}`)
+}
+transformer('JavaScript is the best!', upperFirstWord) // call back function because it is called later
+
+// Function that returns a new function
+const greet = function (greeting) {
+  return function (name) {
+  }
+}
+
+const greeterHey = greet('Hey');
+greeterHey('Jonas');
+
+// Arrow function returning function
+const greet = greeting => {
+  return function(name){
+    console.log(`${greeting} ${name}`)
+  }
+}
+
+const greetArr = greeting => name => console.log(`${greeting} ${name}`); 
+// Arrow function returning another arrow function
+
+// Call and Apply - allows use to explicitly define the this keyword
+
+const lufthansa = {
+  airline: 'Lufthansa',
+  iataCode: 'LH',
+  bookings: [],
+  book(flightNum, name) {
+    console.log(`${this.airline} booked a seat on ${this.iataCode} ${flightNum}`);
+    this.bookings.push({ flight: `${this.iataCode}${flightNum}`, name })
+  }
+}
+
+lufthansa.book(237, 'Preyansh Dutta');
+lufthansa.book(635, 'Mike');
+// console.log(lufthansa);
+
+// All of the variable names inside the object must match in order to use the call method
+const eurowings = {
+  airline: 'Eurowings',
+  iataCode: 'EW',
+  bookings: [],
+};
+
+const book = lufthansa.book;
+
+// Call method
+// book(23, 'Sarah Williams');
+book.call(eurowings, 23, 'Sarah Williams'); // manually and explicitly set the this keyword of any function we want to call eventho the book method is inside of lufthansa function - the call method allows us to go into lufthansa and get the book function
+console.log(eurowings);
+
+book.call(lufthansa, 239, 'Mary Cooper')
+console.log(lufthansa);
 
 
+// Apply Method
+const flightData = [583, 'George Cooper'];
+book.apply(eurowings, flightData) // (this, array of data) -> calls the book function with the flightData as parameters
+console.log(eurowings);
+
+book.call(eurowings, ...flightData); // allows use to explicitly define the this keyword
+
+// Bind method
+// Does not immediately call the function instead it returns a new function
+
+const bookEW = book.bind(eurowings); // returns a new function where the this keyword is set to eurowings
+const bookLH = book.bind(lufthansa);
+
+bookEW(23, 'Steven Williams');
+
+const bookEW23 = book.bind(eurowings, 67765);
+bookEW23('oierf');
+bookEW23('Cooper');
+
+// With Event Listeners
+lufthansa.planes = 300;
+lufthansa.buyPlane = function () {
+  console.log(this);
+
+  this.planes++;
+  console.log(this.planes)
+}
+// lufthansa.buyPlane();
+document.querySelector('.buy').addEventListener('click', lufthansa.buyPlane.bind(lufthansa));
+
+// Partial application
+const addTax = (rate, value) => value + value * rate;
+console.log(addTax(0.1, 100));
+
+const addVAT = addTax.bind(null, 0.23) // since we dont care about the this keyword
+// 0.23 sets the rate value in stone
+
+console.log(addVAT(100));
+console.log(addVAT(23));
 
 
 
