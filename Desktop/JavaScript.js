@@ -919,6 +919,147 @@ const addVAT = addTax.bind(null, 0.23) // since we dont care about the this keyw
 console.log(addVAT(100));
 console.log(addVAT(23));
 
+// Immediately Invoked Function Expression
+
+(function() {
+  console.log('This will never run again');
+})();
+
+// Closures - hardest javascript concept
+// What is a closure?
+
+// Closure: makes a function remember all the variables that were created at the birth place by the time it was created
+
+// A function has access to the variable environment (VE) of the execution context in which it was created
+
+// Closure: VE attached to the funciton, exactly as it was at the time and place the function was created
+
+
+const secureBooking = function () {
+  let passengerCount = 0;
+  return function () {
+    passengerCount++;
+    console.log(`${passengerCount} passengers`);
+  }
+}
+
+const booker = secureBooking(); // closure since booker is only created when secureBooking is made
+// thanks to closure - a function does not lose connection to variables that exist in the funciton's birthplace
+
+// A closure gives a function access to all the variables of its parent function, even after that parent function has returned. The function keeps a reference to its outer scope, wehich preserves the scope chain throughout time
+
+booker();
+booker();
+booker();
+
+let f;
+const g = function () {
+  const a = 23;
+  f = function () {
+    console.log(a * 2);
+  }
+}
+
+const h = function () {
+  const b = 777;
+  f = function () {
+    console.log(b * 2);
+  }
+}
+
+g();
+f();
+
+// Re-assigning f function
+h();
+f();
+console.dir(f);
+
+// Example 2 - using timeout
+const boardPassengers = function (n, wait) {
+  const perGroup = n / 3;
+  setTimeout(function () {
+    console.log(`We are now boarding all ${n} passengers`);
+    console.log(`There are 3 groups, each with ${perGroup} passengers`);
+  }, wait * 1000)
+  console.log(`Will start boarding in ${wait} seconds`);
+}
+
+const perGroup = 1000;
+boardPassengers(180, 3);
+
+
+let arr = ['a', 'b', 'c', 'd', 'e'];
+
+// slice with arrays
+console.log(arr.slice(2, 4));
+console.log(arr.slice(-2));
+
+
+// SPLICE 
+console.log(arr.splice(2)); // start parameter and gets rid of # of elements to delete
+
+
+// REVERSE
+arr = ['a', 'b', 'c', 'd', 'e'];
+const arr2 = ['j', 'i', 'h', 'g', 'f'];
+console.log(arr2.reverse());
+
+// CONCAT
+const letters = arr.concat(arr2);
+console.log(letters);
+console.log([...arr, ...arr2]);
+
+// JOIN
+console.log(letters.join(' - '));
+
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+
+for (const movement of movements) {
+  if (movement > 0) {
+    console.log(`You deposited ${movement}`);
+  } else {
+    console.log(`You withdrew ${Math.abs(movement)}`);
+  }
+}
+
+// For each call back function
+// cannot break or continue
+movements.forEach(function (mov, i) {
+  if (mov > 0) {
+    console.log(`Movement ${i + 1}: You deposited ${mov}`);
+  } else {
+    console.log(`Movement ${i + 1}: You withdrew ${Math.abs(mov)}`);
+  }
+});
+
+// ForEach method on maps and sets
+
+const currencies = new Map([
+  ['USD', 'United States dollar'],
+  ['EUR', 'Euro'],
+  ['GBP', 'Pound sterling'],
+]);
+
+currencies.forEach(function (value, key, map) {
+  console.log(`${key}: ${value}`);
+})
+
+// Set
+const currenciesUnique = new Set(['USD', 'GDP', 'USD', 'EUR', 'EUR']);
+console.log(currenciesUnique);
+currenciesUnique.forEach(function (value, _, map) {
+  console.log(`${value}: ${value}`);
+})
+
+
+
+
+
+
+
+
+
 
 
 
