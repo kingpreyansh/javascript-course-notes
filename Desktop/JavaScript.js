@@ -1052,6 +1052,59 @@ currenciesUnique.forEach(function (value, _, map) {
   console.log(`${value}: ${value}`);
 })
 
+// Method for inserting
+
+// <!-- beforebegin -->
+// <p>
+//   <!-- afterbegin -->
+//   foo
+//   <!-- beforeend -->
+// </p>
+// <!-- afterend -->
+
+// Reading the HTML contents of an element
+
+.insertAdjacentHTML();
+
+// Data Transformations with Map, Filter, Reduce
+map() // builds us a new array containing the results of applying an operation on all original array elements
+
+filter() // filter returns a new array containing the array elements that passed a specified test condition
+
+reduce() // reduce boils all array elements down to one single value (adding all elements together)
+
+// Map
+const movements = [200, 450, -400, 3000, -650, -130, 70, 1300];
+const eurToUsd = 1.1;
+let movemementsUSD = movements.map(function (mov) {
+  return mov * eurToUsd; // fills the array with mov * eurToUsd 
+})
+movemementsUSD = movements.map(mov => mov * eurToUsd); // fills the array with mov * eurToUsd 
+console.log(movemementsUSD);
+
+const movementsDescriptions = movements.map((mov, i) =>
+  `Movement ${i + 1}: You ${mov > 0 ? 'deposited' : 'withdrew'} ${Math.abs(mov)}`
+);
+console.log(movementsDescriptions);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
