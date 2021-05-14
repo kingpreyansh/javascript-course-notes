@@ -1087,27 +1087,333 @@ const movementsDescriptions = movements.map((mov, i) =>
 );
 console.log(movementsDescriptions);
 
+// filter method
+const deposits = movements.filter(function (mov) {
+  return mov > 0;
+});
+console.log(movements);
+console.log(deposits);
+
+// reduce method
+const balance = movements.reduce((acc, curr) => acc + curr, 0); // the first parameter is the accumulator - the value that we ultimately want to return
+console.log(balance);
+
+// find method
+console.log(accounts);
+const account = accounts.find(acc => acc.owner === 'Jessica Davis');
+console.log(account);
+
+// Prevent form from submitting
+e.preventDefault();
+
+// find index
+const index = accounts.findIndex(acc => acc.username === currentAccount.username);
+
+// SOME - if there is any value for which the function is true then the method returns true
+const anyDeposits = movements.some(mov => mov > 0);
+
+// EVERY method - if all the elements in the array passes our condition
+console.log(account4.movements.every(mov => mov > 0));
+
+// FLAT method
+const arr = [[1, 2, 3], [4, 5], 7, 8];
+
+// FLATMAP method
+const overallBalance2 = accounts.flat(acc => acc.movements).reduce((acc, mov) => acc + mov, 0);
+
+// Sorting with Strings - even numbers are considered as strings
+const owners = ['Jonas', 'Zach']
+owners.sort()
+
+// return < 0: A, B
+// return > 0: B, A
+movements.sort((a, b) => {
+  if (a > b)
+    return 1;
+  if (b > a)
+    return -1;
+});
+console.log(movements);
+
+// new Array(param)
+const x = new Array(7); // creates an array with 7 items
+x.fill(1); // fills an empty array
+x.fill(1, 3); // fills from index 3
+console.log(x);
+
+// Array.from method
+const y = Array.from({ length: 7 }, () => 1) // an arrow function that returns 1 in each position
+console.log(y);
+
+const z = Array.from({ length: 7 }, (_, i) => i + 1); // throw away function and the second param is the call-back
+console.log(z);
+
+// Which array method to use in different situations?
+
+/*
+
+1. To mutate original array
+Add to original:
+  .push
+  .unshift
+
+Remove from original:
+  .pop
+  .shift
+  .splice
+
+Others:
+  .reverse
+  .sort
+  .fill
+  
+2. To create a new array
+Computed from original:
+  .map
+
+Filtered using condition
+  .filter 
+
+Portion of original
+  .slice
+
+Adding original to other
+  .concat
+
+Flattening the original
+  .flat
+  .flatmap
+  
+3. An array index
+Based on value:
+  .indexOf
+  .findIndexs
+  
+4. An array element
+Based on test condition:
+  .find
+  
+5. Know if array includes
+Based on value:
+  .includes
+  
+Based on test condition:
+  .some
+  .every
+  
+6.  A new string
+  .join
+  
+7. To transform a value
+Based on accumulator
+  .reduce
+  
+8. To just loop array
+Based on callback
+   .forEach
+*/
+
+// Number.parseInt -- String to number
+// Number.isFinite or Number.isNaN
+
+// BigInt(23234234234234234234)
+
+// Date
+const now = new Date();
+// .getFullYear
+// .getFullMonth ... etc
+
+// Setting time outs
+setTimeout(() => console.log(`Here is your pizza 🍕`), 3000); // set it for 3 seconds later
+
+const ingredients = ['olives', 'spinach'];
+const pizzaTimer = setTimeout((ing1, ing2) => console.log(`Here is your pizza 🍕`), 3000, ...ingredients);
+console.log('Waiting...')
+if (ingredients.includes('spinach')) clearTimeout(pizzaTimer); // the timeout clears if the array contains 'spinach'
+
+// Set Interval
+setInterval(function(){
+  const now = new Date();  
+  console.log(now);
+}, 1000);
+
+// Implementing a countdown timer
+const startLogOutTimer = function(){
+  let time = 100;
+  setInterval(function(){
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+    const sec = String(time % 60).padStart(2, 0);;
+    // In each call, print the remaining time to UI
+    labelTimer.textContent = `${min}:${sec}`;
+    time--;
+    // When 0 seconds, stop timer and log user out
+  }, 1000)
+};
+
+// Advanced DOM manipulation
+
+// Dom api is broken up into different types of nodes: Element: HTMLElement, text, comment, document
 
 
+// Selecting elements
+console.log(document.documentElement);
+console.log(document.head);
+console.log(document.body);
 
+const header = document.querySelector('.header');
+const allSections = document.querySelectorAll('.section');
+console.log(allSections);
 
+document.getElementById('section--1')
+const allButtons = document.getElementsByTagName('button'); // HTMLCollection is realtime
 
+// However the same does not happen with the node list
+console.log(allButtons);
 
+// Creating and inserting elements
+// .insertAdjacentHTML
 
+const message = document.createElement('div');
+message.classList.add('cookie-message');
+// message.textContent = 'We use cookies for improved functionality and analytics.';
+message.innerHTML = 'We use cookies for improved functionality and analytics. <button class = "btn--close--cookie">Got it!</button>';
 
+// Prepending adds the message to the first child
+// Append adds the message to the last child
+header.prepend(message);
+header.append(message); // Dom element is unique can only exist in one place
+header.append(message.cloneNode(true));
 
+// header.before(message); // before the header element
+// header.after(message); // after the header element
 
+// Delete Elements
+document.querySelector('.btn--close--cookie').addEventListener('click', function () {
+  message.remove();
+})
 
+/ Attribures
+const logo = document.querySelector('.nav__logo');
+console.log(logo.alt);
+console.log(logo.src);
+console.log(logo.className);
 
+console.log(logo.designer);
+console.log(logo.getAttribute('designer')); // since it is not a standard property of an image - Non-standard
 
+logo.setAttribute('company', 'Bankist');
 
+console.log(logo.src); // Get actual link 
+console.log(logo.getAttribute('src')); // Get relative 
 
+const link = document.querySelector('.twitter-link');
 
+// Data Attributes
+console.log(logo.dataset.versionNumber);
 
+// Classes
+logo.classList.add('c');
+logo.classList.remove('c');
+logo.classList.toggle('c');
+logo.classList.contains('c'); // not includes
 
+// Scrolling from one section to another
 
+const btnScrollTo = document.querySelector('.btn--scroll-to');
+const section1 = document.querySelector('#section--1');
 
+btnScrollTo.addEventListener('click', function (e) {
+  const s1coords = section1.getBoundingClientRect();
+  console.log(s1coords);
 
+  console.log(e.target.getBoundingClientRect()); //.target is the event that we clicked
+  console.log('Current scroll (X/Y)', window.pageXOffset, window.pageYOffset); // Offsets from the page
+
+  console.log('height/width viewport', document.documentElement.clientHeight, document.documentElement.clientWidth);
+
+  // window.scrollTo(s1coords.left + window.pageXOffset, s1coords.top + window.pageYOffset);
+
+  window.scrollTo({
+    left: s1coords.left + window.pageXOffset,
+    top: s1coords.top + window.pageYOffset,
+    behavior: 'smooth',
+  })
+
+// More modern browser
+section1.scrollIntoView({ behavior: 'smooth' });
+  
+
+const h1 = document.querySelector('h1');
+
+const alertH1 = function (e) {
+  alert('addEventListener: Great!') // new way
+
+  h1.removeEventListener('mouseenter', alertH1); // only listening one time
+}
+
+h1.addEventListener('mouseenter', alertH1);
+
+// h1.onmouseenter = function (e) { // hover element
+//   alert('addEventListener: Great!') // old way
+// };
+
+// EVENT Propagation in practice
+const randomInt = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+const randomColor = () => `rgb(${randomInt(0, 255)}, ${randomInt(0, 255)}, ${randomInt(0, 255)})`;
+
+console.log(randomColor(0, 255));
+
+document.querySelector('.nav__link').addEventListener('click', function (e) {
+  console.log('LINK');
+})
+
+document.querySelector('.nav').addEventListener('click', function (e) {
+  console.log('LINK');
+})
+  
+// Event delegation
+// 1) Add the event listener to a common parent element
+// 2) Determine what element originated the event
+
+document.querySelector('.nav__links').addEventListener('click', function (e) {
+  e.preventDefault();
+  // Matching strategy
+  if (e.target.classList.contains('nav__link')) {
+    const id = e.target.getAttribute('href');
+    document.querySelector(id).scrollIntoView({
+      behavior: 'smooth'
+    });
+  }
+})
+  
+// DOM Traversing
+const h1 = document.querySelector('h1');
+
+// Going downwards: child
+console.log(h1.querySelectorAll('.highlight'));
+console.log(h1.childNodes);
+console.log(h1.children);
+h1.firstElementChild.style.color = 'white';
+h1.lastElementChild.style.color = 'white';
+
+// Going upwards: parents
+console.log(h1.parentNode);
+console.log(h1.parentElement);
+
+h1.closest('.header').style.background = 'var(--gradient-secondary)';
+  
+
+// Going sideways: siblings
+console.log(h1.previousElementSibling);
+console.log(h1.nextElementSibling);
+
+console.log(h1.previousSibling);
+console.log(h1.nextSibling);
+
+console.log(h1.parentElement.children);
+[...h1.parentElement.children].forEach(function (e) {
+  if (e !== h1) e.style.transform = 'scale(0.5)';
+})
 
 
 
