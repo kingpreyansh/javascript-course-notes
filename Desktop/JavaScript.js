@@ -1452,3 +1452,28 @@ window.addEventListener('beforeunload', function (e) { // when the x is clicked 
 // of the object can can access and use to communicate with object.
 // GOAL: A solution to more flexible and easier to maintain organization of code
   
+// Class: like a blueprint from which we can create new objects -> build as many instances as we need
+// Instance: a real object that can be sed in the code
+// 4 fundamental principles of OOP - Abstraction, Encapsulation, Inheritance, Polymorphism
+// Abstraction: ignoring or hiding details that don't matter
+// Encapsulation: keeping properties and methods private inside the class - so they are not accessible from outside the class
+// Prevents external code from accidentally manipulating internal properties/state
+// Inheritance: Child class extends parent class. Makes all properties and methods of a certain class available to a child class, forming a hierarchical relationship
+// between classes. This allows us to reuse common logic and to model real-world relationships
+// Polymorphism: A child class can overwrite a method it inherited from a parent class. 
+  
+// Obhjects are instantiated from a class, which functions like a blueprint
+  
+// Objects are linked to a prototype object - prototypal inheritance: the prototype contains methods (behaviour) that are accessible to all objects linked
+// to that prototype
+// Behaviour is delegated to the linked prototype object.
+// 3 ways of implementing OOP
+// Constructor functions: technique to create objects from a function; this is how built-in objects like Array, Maps, or Sets are actually implemented
+// ES6 Classes: modern alternative. 
+// Object.create() - most straightforward way of linking an object to a prototype object
+
+
+  
+  
+  
+  
