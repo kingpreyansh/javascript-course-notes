@@ -1434,9 +1434,21 @@ window.addEventListener('beforeunload', function (e) { // when the x is clicked 
 <script src = "script.js"> // -> Parsing HTML, Fetch Script, Execute -> Finish Parsing HTML (don't want the browser to sit and do nothing)
 // Hence don't put it in the head but instead in the END
   
-<script async src = "script.js"> // -> 
-<script defer src = "script.js">
+<script async src = "script.js"> // -> Parsing and fetched at the same time -> Execute
+  //DOMContentLoaded event waits for all scripts to execute, except for async scripts. So DOMContentLoaded does not wait for async script
+  
+<script defer src = "script.js"> // Execution is put off to the end 
+// Forces DOMContentLoaded event to fire after the defer script is executed
+// Scripts are executed in order
+// Overall the best solution - use for your own scripts when order matters (e.g. including a library)
 
-
-
-
+// Obect Oriented Programming vs Functional Programming
+// What is OOP?
+// A programming paradigm (style of the code) based on the concept of objects
+// We use objects to model real-world abstract features
+// Contains data (properties) or code (methods)
+// Self contained pieces/blocks of code
+// Objects are building blocks of applications and interact with one another - interactions happen through a API, methods that the code outside
+// of the object can can access and use to communicate with object.
+// GOAL: A solution to more flexible and easier to maintain organization of code
+  
