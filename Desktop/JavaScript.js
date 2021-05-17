@@ -1415,9 +1415,27 @@ console.log(h1.parentElement.children);
   if (e !== h1) e.style.transform = 'scale(0.5)';
 })
 
+document.addEventListener('DOMContentLoaded', function (e) {
+  console.log('HTML parsed and DOM tree built!', e)
+})
+  
+document.addEventListener('load', function (e) {
+  console.log('Page fully loaded', e) // When the page is fully loaded
+})
 
+window.addEventListener('beforeunload', function (e) { // when the x is clicked on the browser tab
+  e.preventDefault();
+  console.log(e);
+  e.returnValue = '';
+})
 
-
+// Different ways of loading scripts
+  
+<script src = "script.js"> // -> Parsing HTML, Fetch Script, Execute -> Finish Parsing HTML (don't want the browser to sit and do nothing)
+// Hence don't put it in the head but instead in the END
+  
+<script async src = "script.js"> // -> 
+<script defer src = "script.js">
 
 
 
