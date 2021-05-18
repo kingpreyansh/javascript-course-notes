@@ -1536,8 +1536,51 @@ console.log(jonas.hasOwnProperty('species')); // because this property is a prot
 
 // Prototypal Inheritance / Delegation
 
+// // Object from a constructor function
+// const matilda = new Person('Matilda', 2017); // instance of a person
+// const jack = new Person('Jack', 1975)
+// console.log(matilda, jack);
+// console.log(jonas instanceof Person);
 
+// // Prototypes
+// console.log(Person.prototype);
 
+// Person.prototype.calcAge = function () {
+//   console.log(2037 - this.birthYear);
+// }
+
+// jonas.calcAge();
+// matilda.calcAge();
+
+// console.log(jonas.__proto__);
+// console.log(jonas.__proto__ === Person.prototype);
+
+// console.log(Person.prototype.isPrototypeOf(jonas));
+
+// // .prototypeOfLinkedObjects
+
+// Person.prototype.species = 'Homo Sapiens';
+// console.log(jonas.species, matilda.species);
+
+// console.log(jonas.hasOwnProperty('firstName'));
+// console.log(jonas.hasOwnProperty('species')); // because this property is a prototype that is being accessed
+
+// console.log(jonas.__proto__);
+// console.log(jonas.__proto__.__proto__);
+
+// console.log(Person.prototype.constructor);
+
+// const arr = [3, 5, 6, 23, 25, 6, 3, 5, 23]; // new Array === []
+// console.log(arr.__proto__ === Array.prototype);
+
+// console.log(arr.__proto__.__proto__);
+
+// Array.prototype.unique = function () {
+//   return [...new Set(this)]; // this keyword would refer to the array
+// }
+
+// console.log(arr.unique());
+  
 // ES6 Classes
 
 // Class expression
@@ -1562,6 +1605,62 @@ jessica.calcAge();
   
   // 1. Classes are NOT hoisted (cannot be used before they are declared)
   // 2. Classes are first-class citizens
-  // 3. Classes are executed in strict mode   
+  // 3. Classes are executed in strict mode
+
+// getter -> get age(){
+//              return 2037 - this.birthYear;
+//           }
+// a getter just adds the property 
+  
+// setter use case ->
   
   
+// Object.create can be used to set the prototype to any object
+const PersonProto = {
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+}
+const steven = Object.create(PersonProto);
+console.log(steven);
+steven.name = 'Steven';
+steven.birthYear = 2002;
+steven.calcAge();
+
+///////////////////////////////////////
+// Inheritance Between "Classes": Constructor Functions
+
+const Person = function (firstName, birthYear) {
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+};
+
+Person.prototype.calcAge = function () {
+  console.log(2037 - this.birthYear);
+};
+
+const Student = function (firstName, birthYear, course) {
+  Person.call(this, firstName, birthYear);
+  this.course = course;
+};
+
+// Linking prototypes
+Student.prototype = Object.create(Person.prototype);
+
+Student.prototype.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}`);
+};
+
+const mike = new Student('Mike', 2020, 'Computer Science');
+mike.introduce();
+mike.calcAge();
+
+console.log(mike.__proto__);
+console.log(mike.__proto__.__proto__);
+
+console.log(mike instanceof Student);
+console.log(mike instanceof Person);
+console.log(mike instanceof Object);
+
+Student.prototype.constructor = Student;
+console.dir(Student.prototype.constructor);
