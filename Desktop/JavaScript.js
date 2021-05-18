@@ -1473,7 +1473,95 @@ window.addEventListener('beforeunload', function (e) { // when the x is clicked 
 // Object.create() - most straightforward way of linking an object to a prototype object
 
 
+const Person = function (firstName, birthYear) {
+  this.firstName = firstName;
+  this.birthYear = birthYear;
+  // Adding a method - never do this (1000 copies of this function)
+  // this.calcAge = function () {
+  //   console.log(2037 - this.birthYear);
+  // }
+}
+
+const jonas = new Person('Jonas', 1991); // constructor function
+console.log(jonas);
+
+// 1. New {} is created
+// 2. function is called, this = {}
+// 3. {} linked to prototype
+// 4. function automatically returns {}
+
+// Object from a constructor function
+const matilda = new Person('Matilda', 2017); // instance of a person
+const jack = new Person('Jack', 1975)
+console.log(matilda, jack);
+console.log(jonas instanceof Person);
+
+// Prototypes
+console.log(Person.prototype);
+
+Person.prototype.calcAge = function () {
+  console.log(2037 - this.birthYear);
+}
+
+jonas.calcAge();
+matilda.calcAge();
+
+console.log(jonas.__proto__);
+console.log(jonas.__proto__ === Person.prototype);
+
+console.log(Person.prototype.isPrototypeOf(jonas));
+
+// .prototypeOfLinkedObjects
+
+Person.prototype.species = 'Homo Sapiens';
+console.log(jonas.species, matilda.species);
+
+console.log(jonas.hasOwnProperty('firstName'));
+console.log(jonas.hasOwnProperty('species')); // because this property is a prototype that is being accessed
+
+// Prototype property
+// Constructor function [Person()] -> .prototype Prototype [Person.prototype] ---- This is called the prototype chain but it does not end here
+// Object() -> Object.prototype
+// Person() -> Person.prototype ⬆️ 
+//         {jonas} Person.prototype ⬆️
   
+// How is it created?
+// const jonas = new Person('Jonas', 1999);
+// jonas.calcAge();
   
+// The new operator:
+  // 1) An empty object is created
+  // 2) this keyword in constructor function cakk us set to the new oject
+  // 3) The new object is linked to the constructor function's prototype property
+
+// Prototypal Inheritance / Delegation
+
+
+
+// ES6 Classes
+
+// Class expression
+// const PersonCl = class{}
+
+
+// Class declaration
+class PersonCl {
+  constructor(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  }
+  // Methods will be added to .prototype property
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  }
+}
+
+const jessica = new PersonCl('Jessica', 1996);
+console.log(jessica);
+jessica.calcAge();
+  
+  // 1. Classes are NOT hoisted (cannot be used before they are declared)
+  // 2. Classes are first-class citizens
+  // 3. Classes are executed in strict mode   
   
   
