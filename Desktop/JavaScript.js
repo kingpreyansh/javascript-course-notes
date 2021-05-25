@@ -1664,3 +1664,179 @@ console.log(mike instanceof Object);
 
 Student.prototype.constructor = Student;
 console.dir(Student.prototype.constructor);
+  
+// Asynchronous Javascript, AJAX and APIs
+
+// What is synchronous code? - Code is executed line by line.
+// Execution has to wait ...
+
+// What is asynchronous code? - Used when the rest of the code must load in the background
+// Execution doesn't wait for an asynchronous task to finish its work
+// Certain functions will have a callback function which *usually* makes the code asynchronous
+// Event functions alone or callback functions alone do not make any code async
+
+// AJAX Calls: Asynchronous Javascript and XML: Allows us to communicate with remote web server in an 
+// asynchronous way. With AJAX calls, we can request data from web servers dynamically.
+  
+// Client: HTTP Request (GET/POST/Etc) -> Server
+//       : Server Response -> Client
+
+// API: Application Programming Interface: Piece of software that can be used by another piece of software, 
+// in order to allow applications to talk to each other
+
+// HTTP Request to get data - (CORS - Yes allows us to access other APIs)
+// Endpoint is just the URL we need
+
+// AJAX Call
+const request = new XMLHttpRequest();
+request.open('GET', 'https://restcountries.eu/rest/v2/name/india');
+request.send();
+// console.log(request.responseText);
+
+request.addEventListener('load', function () {
+  const data = JSON.parse(this.responseText);
+  // convert to JSON Object
+  console.log(this.responseText);
+})
+
+// Callback hell - lots of callbacks in each function
+// Promises to deal with Callback Hell
+
+// Promise: An object that is used as a placeholder for future result of an asynchronous operation
+//   => A container for a future value (Example: Response from AJAX call)
+//   chaining promises allows to escape callback hell
+
+// The promise lifecycle
+// Pending: Before the future value is available
+// Settled: (a) Fulfilled: Ready to use (b) Error has happened
+
+// Fetch API returns a promise (Build Promise -> Consume Promise (once we already have a promise))
+const request = fetch('https://restcountries.eu/rest/v2/name/india');
+console.log(request);
+
+const getCountryData = function (country) {
+  fetch(`https://restcountries.eu/rest/v2/name/${country}`).then(function (response) {
+    console.log(response);
+    return response.json(); // available on all the responses of the resolved value
+  }).then(function (data) {
+    console.log(data);
+    renderCountry(data[0]);
+  })// handling a fulfilled promise
+  // fetch returns a promise and on all promises 'then' can be called
+};
+
+getCountryData('portugal')
+  
+// Short version
+const getCountryData = function (country) {
+  fetch(`https://restcountries.eu/rest/v2/name/${country}`)
+    .then((response) => response.json())
+    .then((data) => renderCountry(data[0]));
+};
+
+getCountryData('portugal');
+
+// Try, catch, finally
+  const getCountryData = function (country) {
+  fetch(`https://restcountries.eu/rest/v2/name/${country}`)
+    .then((response) => {
+      console.log(response)
+      if (!response.ok) {
+        throw new Error(`Country not found (${response.status})`)
+      }
+      return response.json()
+    })
+    .then((data) => {
+      renderCountry(data[0]);
+      const neighbour = data[0].borders[0]
+
+      if (!neighbour) return;
+      // Country 2
+      return fetch(`https://restcountries.eu/rest/v2/alpha/${neighbour}`)
+    }).then(response => response.json())
+    .then(data => renderCountry(data, 'neighbour'))
+    .catch(err => {
+      // catching the error
+      console.log(`${err}`);
+      renderError(`Something went wrong! ${err.message}. Try again!`);
+    }).finally(() => {
+      // always needs to happen no matter the promise loads or doesn't
+      countriesContainer.style.opacity = 1;
+    })
+};
+btn.addEventListener('click', function () {
+  getCountryData('portugal');
+})
+
+getCountryData('sdfsdfsfd');
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
