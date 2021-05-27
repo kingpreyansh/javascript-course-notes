@@ -1770,43 +1770,40 @@ btn.addEventListener('click', function () {
 
 getCountryData('sdfsdfsfd');
   
+// Microtasks have priority over regular tasks
+console.log('Test start');
+setTimeout(() => console.log('0 sec timer'), 0);
+Promise.resolve('Resolved promise 1').then(res => console.log(res));
+console.log('Test end');
 
+// Asynchronous behavious with a promise
+const lotteryPromise = new Promise(function (resolve, reject) {
+  console.log('Lottery draw is happening ~')
+  setTimeout(function () {
+    if (Math.random() >= 0.5) {
+      resolve('You WIN 💰') // set as fulfilled
+    } else {
+      reject(new Error('You lost your money 😢'))
+    }
+  }, 2000)
+})
 
+lotteryPromise.then(res => console.log(res)).catch(err => console.error(err));
+  
+// Promisifying setTimeout
+const wait = function (seconds) {
+  return new Promise(function (resolve) {
+    setTimeout(resolve, seconds * 1000);
+  })
+}
 
+wait(2).then(() => {
+  console.log("I waited for two seconds");
+  return wait(1);
+}).then(() => console.log("I waited for 1 second"));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// Promise.resolve()
+// takes in the resolved value as a parameter and handles it immediately.
 
 
 
