@@ -258,3 +258,17 @@ INSERT INTO Query1 (
       WHERE p.id IN (SELECT p.id FROM Player p, PlayerRatings pr WHERE p.id = pr.p_id)
       ORDER BY p.id ASC;
 )
+
+-- Query 2 --------------------------------------------------
+/*
+2. We want to see how popular each lilmon element is. To do this, we associate each element e with a popularity_count. The popularity_count for e is the number of distinct player-lilmon pairs such that lilmon is of element e and player has lilmon favourited and/or has lilmon in their team. The output table has attributes element and popularity_count. The table should be sorted by popularity_count in descending order. Each element should appear at most once in the output table. Take into consideration the element1 and element2 attributes of the Lilmon table.
+*/
+
+INSERT INTO Query2 (
+  SELECT
+  (l.element1, l.element2) AS e, COUNT(DISTINCT (p.id, li.l_id)) AS popularity_count
+  FROM Player p, LilmonInventory li, Lilmon l
+  WHERE p.id = li.p_id AND li.l_id = l.id AND (li.fav = TRUE OR li.in_team = TRUE)
+  GROUP BY l.element1, l.element2
+  ORDER BY popularity_count DESC
+);
